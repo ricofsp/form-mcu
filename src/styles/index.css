@@ -1,0 +1,788 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-brand: #015c80;
+  --color-brand-dark: #01465f;
+  --color-brand-tint: #eaf3f7;
+  --color-ink: #1b2328;
+  --color-ink-2: #46535b;
+  --color-line: #c6cfd4;
+  --color-rule: #8796a0;
+  --color-field: #76848c;
+  --color-desk: #eef1f3;
+  --color-danger: #b42318;
+}
+
+/* Paper form: always light, as on the printed document */
+:root {
+  color-scheme: light;
+  /* Corner radii: small for fields/options, medium for boxes/tables, large for the page */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  /* height of the sticky prototype bar; kept in sync by PrototypeBar */
+  --bar-h: 40px;
+}
+html {
+  font-family: Arial, 'Helvetica Neue', Helvetica, 'Liberation Sans', sans-serif;
+  font-size: 17px;
+  line-height: 24px;
+  color: var(--color-ink);
+  background: var(--color-desk);
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background: var(--color-desk);
+  margin: 0;
+}
+
+.en {
+  font-style: italic;
+}
+
+/* ---------- Sheet (Word page) ---------- */
+.sheet {
+  overflow-wrap: anywhere;
+  background: #fff;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 28px 16px 48px;
+}
+@media (min-width: 768px) {
+  .sheet {
+    margin: 28px auto 64px;
+    padding: 44px 64px 64px;
+    border-radius: var(--r-lg);
+    box-shadow: 0 0 0 1px #dbe1e4, 0 2px 10px rgb(16 40 56 / 0.06);
+  }
+}
+
+[id^='f-'],
+[id^='s-'],
+[id^='t-'] {
+  scroll-margin-top: calc(var(--bar-h) + 24px);
+}
+
+/* ---------- Headings ---------- */
+.sec-title {
+  margin: 52px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--color-brand);
+  color: var(--color-brand);
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 27px;
+}
+.sub-title {
+  margin: 30px 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+/* ---------- Questions ---------- */
+.q {
+  margin-top: 22px;
+}
+.q-inline {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+}
+.q-inline > [role='alert'] {
+  flex-basis: 100%;
+}
+.q-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px 24px;
+  padding: 6px 0;
+  border-bottom: 1px dotted var(--color-line);
+}
+
+/* ---------- Inputs ---------- */
+.inp {
+  font: inherit;
+  color: var(--color-ink);
+  background: #fff;
+  max-width: 100%;
+  min-width: 0;
+}
+.inp::placeholder {
+  color: #7d8a91;
+}
+.inp-box {
+  min-height: 46px;
+  padding: 0 12px;
+  border: 1px solid var(--color-field);
+  border-radius: var(--r-sm);
+}
+textarea.inp-box {
+  padding: 10px 12px;
+  resize: vertical;
+  display: block;
+}
+.inp-select {
+  appearance: none;
+  padding-right: 38px;
+  cursor: pointer;
+  background: #fff
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23015c80' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")
+    no-repeat right 12px center / 18px 18px;
+}
+.inp-select.is-empty {
+  color: #7d8a91;
+}
+.inp-select option {
+  color: var(--color-ink);
+}
+.inp-line {
+  min-height: 40px;
+  padding: 0 6px;
+  border: 0;
+  border-bottom: 1.5px solid var(--color-field);
+  border-radius: 0;
+  background: transparent;
+}
+.inp-cell {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 6px;
+  border: 2px solid var(--color-field);
+  border-radius: var(--r-sm);
+}
+.inp-cell:hover,
+.inp-box:hover {
+  border-color: var(--color-brand);
+}
+.inp:focus,
+.sig-pad:focus {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 1px;
+  border-color: var(--color-brand);
+}
+.inp[aria-invalid='true'],
+.sig-pad.is-invalid {
+  border-color: var(--color-danger);
+  background-color: #fff5f4; /* color only, so the dropdown arrow image survives */
+}
+.inp[type='date'],
+.inp[type='time'] {
+  min-width: 9.5rem;
+}
+
+/* ---------- Radio / checkbox ---------- */
+.choice {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 44px;
+  padding: 10px 8px;
+  margin-left: -8px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  line-height: 23px;
+}
+.choice:hover {
+  background: var(--color-brand-tint);
+}
+.choice-input {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  margin-top: 0.5px;
+  accent-color: var(--color-brand);
+  cursor: pointer;
+}
+.consent-check {
+  border: 1px solid var(--color-line);
+  margin-left: 0;
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+}
+.consent-check.is-checked {
+  border-color: var(--color-brand);
+  background: var(--color-brand-tint);
+}
+
+/* ---------- Document tables (square corners, as on the printed document) ---------- */
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  border: 1px solid var(--color-rule);
+}
+.doc-table th {
+  background: var(--color-brand);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 10px 12px;
+  border: 1px solid #01445f;
+  line-height: 22px;
+  vertical-align: middle;
+}
+.doc-table td {
+  border: 1px solid var(--color-rule);
+  padding: 8px 12px;
+  vertical-align: top;
+  line-height: 23px;
+}
+.doc-table td .choice {
+  min-height: 40px;
+  padding: 8px;
+}
+.doc-table-family {
+  overflow-wrap: normal;
+  hyphens: manual;
+}
+.doc-table-family th {
+  padding: 8px 5px;
+  vertical-align: top;
+}
+.doc-table-family td {
+  padding: 6px 8px;
+  vertical-align: middle;
+}
+.doc-table-family tr.row-group td {
+  border-top: 2px solid var(--color-rule);
+}
+.doc-table-inner {
+  border: 0;
+}
+.doc-table-inner th:first-child,
+.doc-table-inner td:first-child {
+  border-left: 0;
+}
+.doc-table-inner th:last-child,
+.doc-table-inner td:last-child {
+  border-right: 0;
+}
+.doc-table-inner tr:last-child td {
+  border-bottom: 0;
+}
+.doc-table-inner th {
+  border-top: 0;
+  background: var(--color-brand-tint);
+  color: var(--color-ink);
+  border-color: var(--color-rule);
+}
+.doc-stack {
+  border: 1px solid var(--color-rule);
+}
+.doc-stack-head {
+  background: var(--color-brand);
+  color: #fff;
+  font-weight: 700;
+  padding: 10px 14px;
+}
+
+/* ---------- Identity table ---------- */
+.identity {
+  border: 1px solid var(--color-rule);
+}
+.identity-row {
+  border-bottom: 1px solid var(--color-rule);
+}
+.identity-row:last-child {
+  border-bottom: 0;
+}
+.identity-label {
+  padding: 10px 14px 4px;
+  line-height: 23px;
+}
+.identity-input {
+  padding: 4px 14px 12px;
+}
+/* compact fields inside the identity table */
+.identity .inp-box {
+  min-height: 38px;
+  padding: 0 10px;
+}
+.identity textarea.inp-box {
+  min-height: 58px;
+  padding: 7px 10px;
+}
+.identity .choice {
+  min-height: 36px;
+  padding: 6px 8px;
+}
+@media (min-width: 640px) {
+  .identity-row {
+    display: grid;
+    grid-template-columns: 38% 1fr;
+  }
+  .identity-label {
+    padding: 6px 14px;
+    border-right: 1px solid var(--color-rule);
+    display: flex;
+    align-items: center;
+  }
+  .identity-input {
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+/* ---------- Signature ---------- */
+.sig-pad {
+  display: block;
+  width: 100%;
+  height: 150px;
+  border: 1px solid var(--color-field);
+  border-radius: var(--r-md);
+  background: #fff;
+  touch-action: none;
+  cursor: crosshair;
+}
+.officer-box {
+  height: 150px;
+  border: 1px dashed var(--color-line);
+  border-radius: var(--r-md);
+  background: #f6f8f9;
+  color: var(--color-ink-2);
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.officer-line {
+  flex: 1;
+  border-bottom: 1.5px solid var(--color-line);
+  min-height: 40px;
+  box-sizing: content-box;
+}
+
+/* ---------- Site footer ----------
+   Last child of .sheet: negative margins pull it out to the sheet's edges (matching .sheet padding),
+   so it reads as the bottom band of the form card. */
+.site-footer {
+  background: var(--color-brand);
+  color: #fff;
+  font-size: 14px;
+  line-height: 18px;
+  margin: 40px -16px -40px; /* phone .sheet padding: 20px 16px 40px */
+  padding: 0 16px;
+}
+@media (min-width: 768px) {
+  .site-footer {
+    margin: 48px -64px -64px;
+    padding: 0 64px;
+    border-radius: 0 0 var(--r-lg) var(--r-lg);
+  }
+}
+.site-footer-link,
+.site-footer-icon {
+  display: inline-flex;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--r-sm);
+}
+.site-footer svg {
+  width: 18px;
+  height: 18px;
+}
+.site-footer-link {
+  gap: 7px;
+  min-height: 28px;
+  white-space: nowrap;
+}
+.site-footer-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+/* icons sit shoulder to shoulder, like a single badge group */
+.site-footer-icon {
+  justify-content: center;
+  width: 22px;
+  height: 26px;
+  transition: background-color 0.15s ease;
+}
+.site-footer-icon:hover {
+  background: rgb(255 255 255 / 0.15);
+}
+.site-footer-link:focus-visible,
+.site-footer-icon:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  font: inherit;
+  font-weight: 700;
+  min-height: 50px;
+  padding: 0 24px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  border: 1.5px solid var(--color-brand);
+}
+.btn-primary {
+  background: var(--color-brand);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--color-brand-dark);
+}
+.btn-outline {
+  background: #fff;
+  color: var(--color-brand);
+}
+.btn-outline:hover {
+  background: var(--color-brand-tint);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn:focus-visible,
+.btn-link:focus-visible,
+.scroll-btn:focus-visible {
+  outline: 3px solid var(--color-brand);
+  outline-offset: 2px;
+}
+.btn-link {
+  font: inherit;
+  background: none;
+  border: 0;
+  padding: 4px 0;
+  color: var(--color-brand);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.btn-link:disabled {
+  color: var(--color-ink-2);
+  text-decoration: none;
+  cursor: default;
+  font-weight: 400;
+}
+/* Floating scroll-to-top / scroll-to-bottom buttons, stacked */
+.scroll-nav {
+  position: fixed;
+  /* sits just outside the right edge of the 900px sheet; falls back to the screen edge when there is no room */
+  left: min(calc(50% + 450px + 16px), calc(100% - 42px - 16px));
+  bottom: 24px;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.scroll-btn {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 2px solid #fff; /* keeps it visible when it sits over the brand-coloured footer */
+  border-radius: 999px;
+  background: var(--color-brand);
+  color: #fff;
+  box-shadow: 0 4px 14px rgb(1 70 95 / 0.28), 0 1px 3px rgb(1 70 95 / 0.2);
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+  animation: scroll-btn-in 0.2s ease-out;
+}
+.scroll-btn:hover {
+  background: var(--color-brand-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgb(1 70 95 / 0.34), 0 2px 4px rgb(1 70 95 / 0.2);
+}
+.scroll-btn:active {
+  transform: translateY(0);
+}
+@keyframes scroll-btn-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-btn {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* ---------- Review ---------- */
+.status-box {
+  padding: 14px 18px;
+  border: 1.5px solid;
+  border-radius: var(--r-md);
+}
+.status-box.is-error {
+  border-color: var(--color-danger);
+  background: #fff5f4;
+}
+.status-box.is-ok {
+  border-color: var(--color-brand);
+  background: var(--color-brand-tint);
+}
+.sum-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 4px;
+}
+.sum-table th,
+.sum-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--color-line);
+  line-height: 1.4;
+}
+.sum-table th {
+  font-weight: 400;
+  color: var(--color-ink-2);
+  width: 46%;
+}
+.sum-table .sum-sub td {
+  padding-top: 16px;
+  font-weight: 700;
+  color: var(--color-ink);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgb(16 30 40 / 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 50;
+}
+.modal {
+  background: #fff;
+  max-width: 480px;
+  width: 100%;
+  padding: 24px;
+  border-radius: var(--r-lg);
+  border-top: 4px solid var(--color-brand);
+}
+
+/* Print = the filled-in form exactly as on screen (tables included), sized to fit A4. */
+@page {
+  size: A4;
+  margin: 12mm;
+}
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  html {
+    /* keep table header fills, tinted boxes and checked radios */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  html,
+  body {
+    background: #fff;
+  }
+  .sheet {
+    /* A4 minus margins is ~700px wide; 0.8 zoom gives the ~880px desktop layout room, same as on screen.
+       Zoom the sheet, not <html>: zooming <html> also shrinks the @page margins and the content then
+       overflows the printable area, clipping the right edge of tables. */
+    zoom: 0.8;
+    box-shadow: none;
+    margin: 0;
+    padding: 0 4px; /* keeps table borders inside the printable edge */
+    border-radius: 0;
+    max-width: none;
+  }
+  /* empty fields print blank, not with hint text */
+  .inp::placeholder {
+    color: transparent;
+  }
+  .inp-select.is-empty {
+    color: transparent;
+  }
+  textarea.inp-box {
+    resize: none;
+  }
+  /* don't split a row, question or heading from what follows */
+  tr,
+  .q,
+  .q-row,
+  .q-inline,
+  .identity-row,
+  .doc-stack,
+  .sig-block {
+    break-inside: avoid;
+  }
+  /* the signature columns sit side by side on paper, as on desktop */
+  .sig-block {
+    grid-template-columns: 1fr 1fr;
+  }
+  /* validation hints are for the screen only: print empty fields plainly */
+  .sheet [role='alert'] {
+    display: none;
+  }
+  .inp[aria-invalid='true'],
+  .sig-pad.is-invalid {
+    border-color: var(--color-field);
+    background-color: #fff;
+  }
+  .sec-title,
+  .sub-title {
+    break-after: avoid;
+  }
+}
+
+/* ---------- Type scale ----------
+   Four sizes only, all with whole-pixel line heights:
+   title 24 · section 21 · sub-heading 18 · body 17 (every question, option, field and table cell) · small 15 (helper text, table headers).
+   Bold is reserved for headings (title, section, sub-heading, table headers). */
+.t-title {
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 700;
+}
+.t-section {
+  font-size: 21px;
+  line-height: 27px;
+  font-weight: 700;
+}
+.t-sub {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+}
+.t-small {
+  font-size: 15px;
+  line-height: 22px;
+}
+
+/* Desktop/tablet: render the whole page at 80%, the same as browser zoom (Ctrl −) at 80%.
+   Phones keep 100% so text and touch targets stay comfortable. */
+@media screen and (min-width: 768px) {
+  html {
+    zoom: 0.8;
+  }
+}
+
+/* Phones: a tighter type scale and spacing so long questions don't feel cramped.
+   title 20 · section 18 · sub-heading 16 · body 15 · small 13.
+   Field text stays 16px: iOS zooms into any input whose font is smaller. */
+@media screen and (max-width: 767px) {
+  html {
+    font-size: 15px;
+    line-height: 22px;
+  }
+  .sheet {
+    padding: 20px 16px 40px;
+  }
+  .t-title {
+    font-size: 20px;
+    line-height: 26px;
+  }
+  .t-section,
+  .sec-title {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .sec-title {
+    margin: 40px 0 12px;
+  }
+  .t-sub,
+  .sub-title {
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .sub-title {
+    margin: 24px 0 6px;
+  }
+  .t-small {
+    font-size: 13px;
+    line-height: 19px;
+  }
+  .q {
+    margin-top: 18px;
+  }
+  .q-inline {
+    margin-top: 12px;
+  }
+  .q-row {
+    padding: 4px 0;
+  }
+  .inp {
+    font-size: 16px;
+  }
+  .inp-box {
+    min-height: 42px;
+  }
+  .inp-line {
+    min-height: 38px;
+  }
+  .inp-cell {
+    min-height: 40px;
+  }
+  .choice {
+    min-height: 40px;
+    padding: 8px;
+    gap: 10px;
+    line-height: 21px;
+  }
+  .choice-input {
+    width: 18px;
+    height: 18px;
+    margin-top: 1.5px;
+  }
+  .doc-table th {
+    font-size: 13px;
+    line-height: 18px;
+    padding: 8px 10px;
+  }
+  .doc-table td {
+    padding: 8px 10px;
+    line-height: 21px;
+  }
+  .doc-stack-head {
+    padding: 9px 12px;
+  }
+  .identity-label {
+    padding: 10px 12px 4px;
+    line-height: 21px;
+  }
+  .identity-input {
+    padding: 4px 12px 12px;
+  }
+  .btn {
+    min-height: 46px;
+  }
+  .site-footer {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .site-footer svg {
+    width: 16px;
+    height: 16px;
+  }
+  .site-footer-link {
+    gap: 6px;
+  }
+  .site-footer-icon {
+    width: 20px;
+  }
+  .scroll-nav {
+    bottom: 16px;
+    left: auto;
+    right: 16px;
+    gap: 6px;
+  }
+  .scroll-btn {
+    width: 38px;
+    height: 38px;
+  }
+}
