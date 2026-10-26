@@ -26,7 +26,7 @@ export function dummyData(): FormState {
     dokter_mcu: 'dr. Contoh, Sp.PD',
     paket: 'Longevity & Wellness',
     jenis_pekerjaan: 'non_shift',
-    kriteria_pekerjaan: 'wfh',
+    kriteria_pekerjaan: 'online',
     lokasi_pekerjaan: 'rumah',
     keluhan: 'Sering pegal di leher dan mudah lelah sore hari.',
     riwayat_sekarang: 'Tidak ada.',

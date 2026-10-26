@@ -205,7 +205,7 @@ export const SECTIONS: Section[] = [
         labelStyle: 'bold',
         cols: 3,
         opts: [
-          { v: 'wfh', l: 'Kerja dari rumah (_Work from Home_/WFH)' },
+          { v: 'online', l: 'Online (_Online_)' },
           { v: 'offline', l: 'Offline (_Offline_)' },
           { v: 'gabungan', l: 'Gabungan (_Combination_)' },
         ],
@@ -218,7 +218,7 @@ export const SECTIONS: Section[] = [
         cols: 3,
         opts: [
           { v: 'kantor', l: 'Di kantor (_At the office_)' },
-          { v: 'rumah', l: 'Di rumah (_Remote work_)' },
+          { v: 'rumah', l: 'Di rumah/WFH (_Work from home_)' },
           { v: 'travel', l: 'Sering bepergian (_Often travel_)' },
         ],
       },
