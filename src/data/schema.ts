@@ -288,7 +288,7 @@ export const SECTIONS: Section[] = [
     title: 'Riwayat Menstruasi dan Kehamilan (_Menstrual and Pregnancy History_)',
     show: (s) => s.jenis_kelamin === 'P',
     nodes: [
-      { t: 'h2', l: 'Riwayat Menstruasi dan Kehamilan (untuk pasien perempuan)\n_Menstrual and Pregnancy History for female patients_' },
+      { t: 'h2', l: 'Riwayat Menstruasi dan Kehamilan (untuk pasien perempuan)\n_Menstrual and Pregnancy History for female patients_', badge: '(tidak wajib diisi)', badgeTone: 'red' },
       { t: 'field', key: 'haid_usia', l: 'Usia haid pertama (_Age of first menstruation_) :', type: 'number', suffix: 'tahun (_years old_)', width: 'xs' },
       { t: 'field', key: 'haid_hpht', l: 'Hari pertama haid terakhir (_First day of last period_) :', type: 'date', suffix: '(_dd/mm/yy_)', width: 'md' },
       { t: 'field', key: 'haid_lama', l: 'Lama haid (_Menstrual period_) :', type: 'number', suffix: 'hari (_days_)', width: 'xs' },
@@ -306,6 +306,35 @@ export const SECTIONS: Section[] = [
       { t: 'field', key: 'hamil_jumlah', l: 'Jumlah kehamilan (_Number of pregnancies_) :', type: 'number', suffix: 'x (_times_)', width: 'xs' },
       { t: 'field', key: 'lahir_jumlah', l: 'Jumlah kelahiran (_Number of births_) :', type: 'number', suffix: 'x (_times_)', width: 'xs' },
       { t: 'field', key: 'keguguran_jumlah', l: 'Jumlah keguguran (_Number of miscarriages_) :', type: 'number', suffix: 'x (_times_)', width: 'xs' },
+      { t: 'field', key: 'menopause_usia', l: 'Menopause usia (_Menopause at age_) :', type: 'number', suffix: 'tahun (_years old_)', width: 'xs' },
+      {
+        t: 'radio',
+        key: 'kb',
+        l: 'Penggunaan KB (_Use of contraception_) :',
+        cols: 2,
+        opts: yaWith({ prefix: 'pada usia (_at age_)', type: 'number', suffix: 'tahun (_years old_)', width: 'xs' }),
+      },
+      {
+        t: 'radio',
+        key: 'kb_masalah',
+        l: 'Masalah akibat kontrasepsi (_Problems resulting from contraception_) :',
+        cols: 2,
+        opts: yaWith({ placeholder: 'sebutkan', width: 'lg' }),
+      },
+      {
+        t: 'radio',
+        key: 'papsmear',
+        l: 'Riwayat pap smear (_History of pap smear examination_) :',
+        cols: 2,
+        opts: yaWith({ prefix: 'pada tahun (_in_)', type: 'number', width: 'xs' }),
+      },
+      {
+        t: 'radio',
+        key: 'mammografi',
+        l: 'Riwayat mammografi/USG payudara (_History of mammography/breast ultrasound_) :',
+        cols: 2,
+        opts: yaWith({ prefix: 'pada tahun (_in_)', type: 'number', width: 'xs' }),
+      },
     ],
   },
   {
@@ -420,6 +449,7 @@ export const SECTIONS: Section[] = [
     nodes: [
       { t: 'h2', l: 'Pola Tidur (_Sleep Pattern_) :' },
       yn('tidur_sulit', 'Apakah Anda kesulitan untuk mulai tidur? (_Do you find it hard to fall asleep?_)'),
+      ynu('tidur_dengkur', 'Apakah Anda mendengkur saat tidur? (_Do you snore while you sleep?_)'),
       {
         t: 'radio',
         key: 'tidur_waktu',

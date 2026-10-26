@@ -6,7 +6,6 @@ import { SheetHeader } from "./components/layout/SheetHeader";
 import { SiteFooter } from "./components/layout/SiteFooter";
 import { Done } from "./components/review/Done";
 import { Review } from "./components/review/Review";
-import { ReqMark } from "./components/ui";
 import { FormProvider, useForm } from "./state/store";
 
 type View = "form" | "review" | "done";
@@ -68,8 +67,9 @@ function Shell() {
             {/* the visible form name lives in the letterhead */}
             <h1 className="sr-only">Form Pengkajian MCU</h1>
             <p className="no-print mt-6 mb-4 rounded-lg bg-desk px-4 py-2.5 t-small text-ink-2">
-              Isi sesuai kondisi Anda. Tanda <ReqMark /> berarti wajib diisi (
-              <em>required</em>). Jawaban tersimpan selama sesi ini.
+              Form ini membantu dokter MCU untuk memahami kondisi kesehatan Anda secara menyeluruh. Mohon isi
+              dengan jujur dan sesuai kondisi Anda saat ini. Seluruh informasi jawaban akan bersifat rahasia dan
+              hanya digunakan untuk kepentingan medis. Waktu pengisian berkisar 20–30 menit.
             </p>
             <FormBody />
             <div className="no-print mt-12 border-t-2 border-brand pt-6">
