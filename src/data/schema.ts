@@ -171,7 +171,7 @@ export const WATER_OPTS: Opt[] = [
   { v: 'gt3', l: '> 3 L' },
 ]
 
-export const MED_ROWS = 5
+export const MED_ROWS = 10
 
 /* ------------------------------------------------------------------ */
 /* Sections, in the order of the source document                       */
@@ -205,7 +205,7 @@ export const SECTIONS: Section[] = [
         labelStyle: 'bold',
         cols: 3,
         opts: [
-          { v: 'hibrid', l: 'Hibrid (_Hybrid_)' },
+          { v: 'wfh', l: 'Kerja dari rumah (_Work from Home_/WFH)' },
           { v: 'offline', l: 'Offline (_Offline_)' },
           { v: 'gabungan', l: 'Gabungan (_Combination_)' },
         ],
@@ -215,9 +215,10 @@ export const SECTIONS: Section[] = [
         key: 'lokasi_pekerjaan',
         l: 'Lokasi pekerjaan (_Workplace_)',
         labelStyle: 'bold',
-        cols: 2,
+        cols: 3,
         opts: [
           { v: 'kantor', l: 'Di kantor (_At the office_)' },
+          { v: 'rumah', l: 'Di rumah (_Remote work_)' },
           { v: 'travel', l: 'Sering bepergian (_Often travel_)' },
         ],
       },
