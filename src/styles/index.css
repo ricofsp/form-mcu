@@ -140,6 +140,19 @@ textarea.inp-box {
 .inp-select option {
   color: var(--color-ink);
 }
+/* compact picker in the prototype bar: the negative margin keeps it within the text line so the bar doesn't grow */
+.inp.bar-select {
+  height: 26px;
+  margin-block: -2px;
+  padding: 0 26px 0 8px;
+  border: 1px solid var(--color-field);
+  box-shadow: none;
+  border-radius: var(--r-sm);
+  background-position: right 6px center;
+  background-size: 14px 14px;
+  font-size: inherit;
+  line-height: 1;
+}
 .inp-line {
   min-height: 40px;
   padding: 0 6px;

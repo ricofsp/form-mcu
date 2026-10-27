@@ -4,6 +4,7 @@ import { ScrollButtons } from "./components/layout/ScrollButtons";
 import { PrototypeBar } from "./components/layout/PrototypeBar";
 import { SheetHeader } from "./components/layout/SheetHeader";
 import { SiteFooter } from "./components/layout/SiteFooter";
+import { DEFAULT_HOSPITAL, findHospital } from "./data/hospitals";
 import { Done } from "./components/review/Done";
 import { Review } from "./components/review/Review";
 import { FormProvider, useForm } from "./state/store";
@@ -29,6 +30,19 @@ function Shell() {
   const { setShowErrors, replaceAll } = useForm();
   const [view, setView] = useState<View>("form");
   const [done, setDone] = useState<{ ref: string; at: Date } | null>(null);
+  // `?rs=PHBW` opens the form for a specific hospital; defaults to the group logo
+  const [hospital, setHospital] = useState(() =>
+    findHospital(new URLSearchParams(window.location.search).get("rs")),
+  );
+
+  const pickHospital = (code: string) => {
+    const h = findHospital(code);
+    setHospital(h);
+    const url = new URL(window.location.href);
+    if (h === DEFAULT_HOSPITAL) url.searchParams.delete("rs");
+    else url.searchParams.set("rs", h.code);
+    window.history.replaceState(null, "", url);
+  };
 
   const go = (v: View, anchor?: string) => {
     setView(v);
@@ -58,9 +72,9 @@ function Shell() {
 
   return (
     <>
-      <PrototypeBar />
+      <PrototypeBar hospital={hospital} onHospital={pickHospital} />
       <main className="sheet">
-        <SheetHeader />
+        <SheetHeader hospital={hospital} />
 
         {view === "form" && (
           <>
