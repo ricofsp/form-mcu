@@ -289,7 +289,7 @@ function FamilyTable() {
 
 const VAK_YA: Opt = { v: 'ya', l: 'Ya, pada tahun (_Yes, in_)', detail: { type: 'number', width: 'xs', placeholder: 'tahun' } }
 const VAK_TIDAK: Opt = { v: 'tidak', l: 'Tidak (_No_)' }
-const VAK_LUPA: Opt = { v: 'tidak_ingat', l: 'Tidak ingat' }
+const VAK_LUPA: Opt = { v: 'tidak_ingat', l: 'Tidak ingat (_Don\'t remember_)' }
 
 function VaccineTable() {
   const wide = useIsWide()
